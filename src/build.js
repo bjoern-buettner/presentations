@@ -20,6 +20,7 @@ for (const file of fs.readdirSync(`${__dirname}/../presentations`)) {
     fs.writeFileSync(`${__dirname}/../public/${name}.html`, page({presentation}));
   }
 }
+
 fs.writeFileSync(`${__dirname}/../public/index.html`, index({pages}));
 fs.copyFileSync(`${__dirname}/../node_modules/reveal.js/plugin/highlight/highlight.js`, `${__dirname}/../public/highlight.js`);
 fs.copyFileSync(`${__dirname}/../node_modules/reveal.js/plugin/highlight/monokai.css`, `${__dirname}/../public/monokai.css`);
