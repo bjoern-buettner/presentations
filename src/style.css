@@ -1,0 +1,9 @@
+#table-of-contents ul {
+    font-size: 90%;
+    line-height: normal;
+}
+#logo {
+    top: 0;
+    right: 0;
+    position: absolute;
+}

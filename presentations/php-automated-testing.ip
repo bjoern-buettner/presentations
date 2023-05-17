@@ -1,0 +1,105 @@
+title: Automatic Testing in PHP
+author: Björn Büttner
+logo: bjoern-buettner
+slides:
+  - title: Linting
+    subpages:
+      - title: Goals
+        list:
+          - make sure the code is valid from a syntax point of view
+          - make sure the code follows standards in terms of formatting
+          - reduce the manual effort in code reviews
+      - title: Tools
+        list:
+          - PHP Code Sniffer
+          - PHP Parallel Lint
+      - title: Configuration (gitlab)
+        lang: yaml
+        code: |
+          # .gitlab-ci.yml
+          php-lint:
+            stage: test
+            image: php:8.1-cli
+            before_script:
+              - composer install
+            script:
+              - vendor/bin/parallel-lint --exclude vendor/ .
+          psr-12-lint:
+            stage: test
+            image: php:8.1-cli
+            before_script:
+              - composer install
+            script:
+              - vendor/bin/phpcs --standard=PSR12 --extensions=php --ignore=vendor/ .
+  - title: Unit Testing
+    subpages:
+      - title: Goals
+        list:
+          - provide fast feedback for developers
+          - make sure the code does what it is supposed to do
+          - make sure the code does not do what it is not supposed to do
+          - make sure there are no regressions
+          - make sure the code is easy to change
+          - make sure the mistakes are caught early
+      - title: Tools
+        list:
+          - PHPUnit
+          - infection
+      - title: Configuration (gitlab)
+        lang: yaml
+        code: |
+          # .gitlab-ci.yml
+          unit-test:
+            stage: test
+            image: php:8.1-cli
+            before_script:
+              - composer install
+            script:
+              - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.xml
+            artifacts:
+              reports:
+                cobertura: coverage.xml
+          mutation-test:
+            stage: test
+            image: php:8.1-cli
+            before_script:
+              - composer install
+            script:
+              - vendor/bin/infection --min-msi=60 --min-covered-msi=60 --threads=4
+  - title: Static Analysis
+    subpages:
+      - title: Goals
+        list:
+          - find potential bugs in the code
+          - find potential performance issues in the code
+          - find potential security issues in the code
+      - title: Tools
+        list:
+          - Psalm
+          - PHPStan
+          - Phan
+      - title: Configuration (gitlab)
+        lang: yaml
+        code: |
+          # .gitlab-ci.yml
+          static-analysis-psalm:
+              stage: test
+              image: php:8.1-cli
+              before_script:
+              - composer install
+              script:
+              - vendor/bin/psalm --show-info=false
+          static-analysis-phpstan:
+              stage: test
+              image: php:8.1-cli
+              before_script:
+              - composer install
+              script:
+              - vendor/bin/phpstan analyse --no-progress
+          static-analysis-phan:
+              stage: test
+              image: php:8.1-cli
+              before_script:
+              - composer install
+              script:
+              - vendor/bin/phan

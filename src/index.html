@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <title>Presentation Overview</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="reveal.css">
+        <link rel="stylesheet" href="black.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="reveal">
+            <article class="slides">
+                <section>
+                    <h2>Presentations</h2>
+                    <ul id="table-of-contents">
+                        {{#each pages}}
+                            <li><a href="{{name}}.html">{{title}}</a></li>
+                        {{/each}}
+                    </ul>
+                </section>
+            </article>
+        </div>
+        <script src="reveal.js"></script>
+        <script>
+            Reveal.initialize({plugins: [], slideNumber: false, controls: false});
+        </script>
+        <img id="logo" src="logo.png" alt="Björn Büttner">
+    </body>
+</html>
