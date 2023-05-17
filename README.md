@@ -16,4 +16,4 @@ All content is available under the MIT License, so feel free to fork and adapt t
 1. Clone this repository
 2. Run `npm install` to install all dependencies
 3. Run `npm start` to build and start the presentation server
-4. Navigate to [http://localhost:8000](http://localhost:8000) to view the presentations
+4. Navigate to [http://localhost:8080](http://localhost:8080) to view the presentations
