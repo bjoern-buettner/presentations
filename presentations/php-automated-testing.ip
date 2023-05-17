@@ -1,6 +1,4 @@
 title: Automatic Testing in PHP
-author: Björn Büttner
-logo: bjoern-buettner
 slides:
   - title: Linting
     subpages:
