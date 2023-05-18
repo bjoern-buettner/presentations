@@ -29,3 +29,4 @@ fs.copyFileSync(`${__dirname}/../node_modules/reveal.js/dist/reset.css`, `${__di
 fs.copyFileSync(`${__dirname}/../node_modules/reveal.js/dist/reveal.css`, `${__dirname}/../public/reveal.css`);
 fs.copyFileSync(`${__dirname}/../node_modules/reveal.js/dist/theme/black.css`, `${__dirname}/../public/black.css`);
 fs.copyFileSync(`${__dirname}/../src/style.css`, `${__dirname}/../public/style.css`);
+fs.copyFileSync(`${__dirname}/../src/logo.png`, `${__dirname}/../public/logo.png`);
