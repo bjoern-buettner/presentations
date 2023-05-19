@@ -24,6 +24,10 @@ for (const file of fs.readdirSync(`${__dirname}/../presentations`)) {
 fs.writeFileSync(`${__dirname}/../public/index.html`, index({pages}));
 fs.copyFileSync(`${__dirname}/../node_modules/reveal.js/plugin/highlight/highlight.js`, `${__dirname}/../public/highlight.js`);
 fs.copyFileSync(`${__dirname}/../node_modules/reveal.js/plugin/highlight/monokai.css`, `${__dirname}/../public/monokai.css`);
+fs.copyFileSync(`${__dirname}/../node_modules/reveal.js/plugin/notes/notes.js`, `${__dirname}/../public/notes.js`);
+fs.copyFileSync(`${__dirname}/../node_modules/reveal.js/plugin/notes/speaker-view.html`, `${__dirname}/../public/speaker-view.html`);
+fs.copyFileSync(`${__dirname}/../node_modules/reveal.js-verticator/plugin/verticator/verticator.js`, `${__dirname}/../public/verticator.js`);
+fs.copyFileSync(`${__dirname}/../node_modules/reveal.js-verticator/plugin/verticator/verticator.css`, `${__dirname}/../public/verticator.css`);
 fs.copyFileSync(`${__dirname}/../node_modules/reveal.js/dist/reveal.js`, `${__dirname}/../public/reveal.js`);
 fs.copyFileSync(`${__dirname}/../node_modules/reveal.js/dist/reset.css`, `${__dirname}/../public/reset.css`);
 fs.copyFileSync(`${__dirname}/../node_modules/reveal.js/dist/reveal.css`, `${__dirname}/../public/reveal.css`);

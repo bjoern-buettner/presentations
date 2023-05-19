@@ -11,6 +11,11 @@ slides:
         list:
           - PHP Code Sniffer
           - PHP Parallel Lint
+        notes:
+          - PHP Parallel Lint is faster than the PHP inbuilt Lint
+          - PHP Parallel Lint checks for syntax errors
+          - PHP Code Sniffer checks for formatting and coding standards
+          - PHP Code Sniffer can be configured to check for specific standards, usually PSR12 is used
       - title: Configuration (gitlab)
         lang: yaml
         code: |

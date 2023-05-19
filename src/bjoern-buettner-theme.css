@@ -1,4 +1,17 @@
-section.has-light-background, section.has-light-background h1, section.has-light-background h2, section.has-light-background h3, section.has-light-background h4, section.has-light-background h5, section.has-light-background h6 {
+/*!
+ * Based on the black theme of reveal.js
+ * reveal.js 3.6.0
+ * http://revealjs.com
+ * MIT licensed
+ * Created by Hakim El Hattab, 2014
+ */
+section.has-light-background,
+section.has-light-background h1,
+section.has-light-background h2,
+section.has-light-background h3,
+section.has-light-background h4,
+section.has-light-background h5,
+section.has-light-background h6 {
   color: #020;
 }
 
