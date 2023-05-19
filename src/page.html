@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="reveal.css">
         <link rel="stylesheet" href="bjoern-buettner-theme.css">
         <link rel="stylesheet" href="verticator.css">
+        <link rel="stylesheet" href="copycode.css">
         <link rel="stylesheet" href="monokai.css">
         <link rel="stylesheet" href="style.css">
     </head>
@@ -25,9 +26,9 @@
                 </section>
                 {{#each presentation.slides}}
                     <section>
-                        <h2>{{title}}</h2>
                         {{#each subpages}}
                             <section>
+                                <h2>{{../title}}</h2>
                                 <h3>{{title}}</h3>
                                 {{#if list}}
                                     <ul>
@@ -61,14 +62,13 @@
         <script src="highlight.js"></script>
         <script src="notes.js"></script>
         <script src="verticator.js"></script>
+        <script src="copycode.js"></script>
         <script>
             Reveal.initialize({
-                plugins: [RevealHighlight, RevealNotes, Verticator],
+                plugins: [RevealHighlight, RevealNotes, Verticator, CopyCode],
                 slideNumber: 'c/t',
-                controls: false,
                 verticator: {
                     skipuncounted: true,
-                    clickable: false,
                 }
             });
         </script>

@@ -28,9 +28,12 @@ fs.copyFileSync(`${__dirname}/../node_modules/reveal.js/plugin/notes/notes.js`, 
 fs.copyFileSync(`${__dirname}/../node_modules/reveal.js/plugin/notes/speaker-view.html`, `${__dirname}/../public/speaker-view.html`);
 fs.copyFileSync(`${__dirname}/../node_modules/reveal.js-verticator/plugin/verticator/verticator.js`, `${__dirname}/../public/verticator.js`);
 fs.copyFileSync(`${__dirname}/../node_modules/reveal.js-verticator/plugin/verticator/verticator.css`, `${__dirname}/../public/verticator.css`);
+fs.copyFileSync(`${__dirname}/../node_modules/reveal.js-copycode/plugin/copycode/copycode.js`, `${__dirname}/../public/copycode.js`);
+fs.copyFileSync(`${__dirname}/../node_modules/reveal.js-copycode/plugin/copycode/copycode.css`, `${__dirname}/../public/copycode.css`);
 fs.copyFileSync(`${__dirname}/../node_modules/reveal.js/dist/reveal.js`, `${__dirname}/../public/reveal.js`);
 fs.copyFileSync(`${__dirname}/../node_modules/reveal.js/dist/reset.css`, `${__dirname}/../public/reset.css`);
 fs.copyFileSync(`${__dirname}/../node_modules/reveal.js/dist/reveal.css`, `${__dirname}/../public/reveal.css`);
 fs.copyFileSync(`${__dirname}/../src/bjoern-buettner-theme.css`, `${__dirname}/../public/bjoern-buettner-theme.css`);
 fs.copyFileSync(`${__dirname}/../src/style.css`, `${__dirname}/../public/style.css`);
 fs.copyFileSync(`${__dirname}/../src/logo.png`, `${__dirname}/../public/logo.png`);
+fs.copyFileSync(`${__dirname}/../src/favicon.ico`, `${__dirname}/../public/favicon.ico`);

@@ -5,8 +5,9 @@
     "handlebars": "^4.7.7",
     "http-server": "^14.1.1",
     "reveal.js": "^4.5.0",
-    "yaml": "^2.2.2",
-    "reveal.js-verticator": "^1.2.3"
+    "reveal.js-copycode": "^1.0.4",
+    "reveal.js-verticator": "^1.2.3",
+    "yaml": "^2.2.2"
   },
   "scripts": {
     "start": "npm run build && npm run serve",
