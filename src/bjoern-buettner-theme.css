@@ -12,14 +12,14 @@ section.has-light-background h3,
 section.has-light-background h4,
 section.has-light-background h5,
 section.has-light-background h6 {
-  color: #020;
+  color: #afa;
 }
 
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
 :root {
-  --r-background-color: #003300;
+  --r-background-color: #aaffaa;
   --r-main-font: Helvetica, sans-serif;
   --r-main-font-size: 42px;
   --r-main-color: #fff;
@@ -38,15 +38,15 @@ section.has-light-background h6 {
   --r-heading3-size: 1.3em;
   --r-heading4-size: 1em;
   --r-code-font: monospace;
-  --r-link-color: #00cc00;
-  --r-link-color-dark: #00aa00;
-  --r-link-color-hover: #00ff00;
+  --r-link-color: #00aa00;
+  --r-link-color-dark: #008800;
+  --r-link-color-hover: #00cc00;
   --r-selection-background-color: rgba(100, 175, 100, 0.75);
   --r-selection-color: #fff;
 }
 
 .reveal-viewport {
-  background: #005500;
+  background: #aaffaa;
   background-color: var(--r-background-color);
 }
 
