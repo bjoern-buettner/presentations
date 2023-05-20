@@ -21,6 +21,30 @@
                 </section>
                 {{#each presentation.slides}}
                     <section>
+                        {{^if subpages}}
+                            <section>
+                                <h2>{{title}}</h2>
+                                {{#if list}}
+                                    <ul>
+                                        {{#each list}}
+                                        <li>{{this}}</li>
+                                        {{/each}}
+                                    </ul>
+                                {{/if}}
+                                {{#if code}}
+                                    <pre><code data-trim data-noescape data-line-numbers class="language-{{lang}}">{{code}}</code></pre>
+                                {{/if}}
+                                {{#if notes}}
+                                    <aside class="notes">
+                                        <ul>
+                                            {{#each notes}}
+                                            <li>{{this}}</li>
+                                            {{/each}}
+                                        </ul>
+                                    </aside>
+                                {{/if}}
+                            </section>
+                        {{/if}}
                         {{#each subpages}}
                             <section>
                                 <h2>{{../title}}</h2>

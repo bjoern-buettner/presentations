@@ -1,0 +1,83 @@
+title: PHP Unit Testing
+slides:
+  - title: What is Unit Testing
+    list:
+      - Unit Testing is testing a unit of code in isolation
+      - Unit Testing is usually done before the code is committed
+      - Unit Testing is usually done on the developer's machine and on the CI server
+    notes:
+      - Unit Testing is usually done on a single class or function
+      - Unit Testing is usually pretty fast
+      - Unit Testing can be done in real time in IDEs
+  - title: What is a Unit?
+    list:
+      - A unit is usually a class or a function
+      - A unit is a small part of the codebase
+      - A unit is a part of the codebase that can be tested in isolation
+    notes:
+      - A unit is a class or a function
+      - A unit is a small part of the codebase
+      - A unit is a small part of the codebase that can be tested in isolation
+  - title: What is makes Unit Testing difficult?
+    list:
+      - When the code is not using dependency injection
+      - When the code is using static functions
+      - When the code is using built-in functions
+      - When the code is using global state
+    notes:
+      - Dependency Injection allows for easy isolation of tested code
+      - Static functions are hard to mock
+      - Built-in functions are hard to mock
+      - Global state is hard to control
+  - title: How is a Unit Test Build?
+    subpages:
+      - title: Theory
+        list:
+          - Describe...
+          - When...
+          - Action...
+          - Then...
+        notes:
+          - Describe what you are testing in the method name
+          - First set up the test case
+          - Then do the action you want to test
+          - Last assert or expect the result(s)
+      - title: Example
+        lang: php
+        code: |
+          class CalculatorTest extends TestCase
+          {
+              /** @test */
+              public function whenTwoNumbersAreProvidedTheSumIsCalculated()
+              {
+                  $calculator = new Calculator();
+                  $result = $calculator->add(1, 2);
+                  self::assertEquals(3, $result);
+              }
+          }
+        notes:
+          - Declare a method with a speaking name
+          - Add the @test annotation
+          - Create the object you want to test
+          - Call the method you want to test
+          - Assert or expect the result
+  - title: What to Mock and what to Stub?
+    list:
+      - Mock the relevant dependencies of the unit
+      - Do not mock pure logic-less Objects (DTOs, Entities, Value Objects)
+      - Stub any dependency that is not relevant for the test
+      - Do not mock the unit you are testing
+    notes:
+      - This includes most of the dependencies of the constructor and the method called
+      - Pure logic-less Objects are usually just data containers
+      - Stubbing objects like loggers makes it easier to test the unit
+      - Mocking the unit itself makes the test useless
+  - title: What to Expect or Assert?
+    list:
+      - Assert the result of the unit
+      - Expect calls on Mocks
+      - Assert the state of the unit for logic-less Objects (DTOs, Entities, Value Objects)
+    notes:
+      - If the unit returns a value, assert that value
+      - If the unit calls a dependency, expect that call
+      - If the unit changes the state of a logic-less Object, assert that state
