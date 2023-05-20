@@ -3,11 +3,6 @@
     <head>
         <title>{{presentation.title}}</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="reveal.css">
-        <link rel="stylesheet" href="bjoern-buettner-theme.css">
-        <link rel="stylesheet" href="verticator.css">
-        <link rel="stylesheet" href="copycode.css">
-        <link rel="stylesheet" href="monokai.css">
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
@@ -67,9 +62,21 @@
             Reveal.initialize({
                 plugins: [RevealHighlight, RevealNotes, Verticator, CopyCode],
                 slideNumber: 'c/t',
+                controlsTutorial: false,
                 verticator: {
                     skipuncounted: true,
                 }
+            });
+            Reveal.on('slidechanged', event => {
+                if (event.indexh === 0) {
+                    window.location.hash = '';
+                    return;
+                }
+                if (event.indexv > 0) {
+                    window.location.hash = `${event.indexh}/${event.indexv}`;
+                    return;
+                }
+                window.location.hash = `${event.indexh}`;
             });
         </script>
         <img id="logo" src="logo.png" alt="Björn Büttner">
