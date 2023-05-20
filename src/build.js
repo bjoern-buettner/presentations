@@ -20,7 +20,7 @@ if (fs.existsSync(`${__dirname}/../public`)) {
 fs.mkdirSync(`${__dirname}/../public`);
 const pages = [];
 for (const file of fs.readdirSync(`${__dirname}/../presentations`)) {
-  if (file.endsWith('.yml')) {
+  if (file.endsWith('.yml') || file.endsWith('.ip')) {
     const name = file.split('.')[0];
     const presentation = yaml.parse(fs.readFileSync(`${__dirname}/../presentations/${file}`, 'utf8'));
     pages.push({
