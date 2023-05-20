@@ -12,6 +12,7 @@ const htmlMinifyOptions = {
   removeComments: true,
   useShortDoctype: true,
 };
+const now = Date.now();
 
 if (fs.existsSync(`${__dirname}/../public`)) {
   fs.rmdirSync(`${__dirname}/../public`, { recursive: true });
@@ -29,7 +30,7 @@ for (const file of fs.readdirSync(`${__dirname}/../presentations`)) {
     (async () => {
       fs.writeFileSync(
           `${__dirname}/../public/${name}.html`,
-          await minify(page({presentation}), htmlMinifyOptions)
+          await minify(page({presentation, now}), htmlMinifyOptions)
       );
     })();
   }
@@ -38,7 +39,7 @@ for (const file of fs.readdirSync(`${__dirname}/../presentations`)) {
 (async () => {
   fs.writeFileSync(
       `${__dirname}/../public/index.html`,
-      await minify(index({pages}), htmlMinifyOptions)
+      await minify(index({pages, now}), htmlMinifyOptions)
   );
 })();
 

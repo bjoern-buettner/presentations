@@ -12,21 +12,21 @@ section.has-light-background h3,
 section.has-light-background h4,
 section.has-light-background h5,
 section.has-light-background h6 {
-  color: #afa;
+  color: #aaccaa;
 }
 
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
 :root {
-  --r-background-color: #aaffaa;
+  --r-background-color: #eeffee;
   --r-main-font: Helvetica, sans-serif;
   --r-main-font-size: 42px;
-  --r-main-color: #fff;
+  --r-main-color: #050;
   --r-block-margin: 20px;
   --r-heading-margin: 0 0 20px 0;
   --r-heading-font: Helvetica, sans-serif;
-  --r-heading-color: #000;
+  --r-heading-color: #050;
   --r-heading-line-height: 1.2;
   --r-heading-letter-spacing: normal;
   --r-heading-text-transform: uppercase;
@@ -42,7 +42,7 @@ section.has-light-background h6 {
   --r-link-color-dark: #008800;
   --r-link-color-hover: #00cc00;
   --r-selection-background-color: rgba(100, 175, 100, 0.75);
-  --r-selection-color: #fff;
+  --r-selection-color: #050;
 }
 
 .reveal-viewport {
