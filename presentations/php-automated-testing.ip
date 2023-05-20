@@ -2,11 +2,24 @@ title: Automatic Testing in PHP
 slides:
   - title: Linting
     subpages:
+      - title: What is Linting?
+        list:
+          - Linting is the process of running a program that will analyse code for potential errors
+          - Linting is usually done before the code is committed
+          - Linting is usually done on the developer's machine and on the CI server
+        notes:
+          - Linting is usually done on the whole codebase
+          - Linting is usually pretty fast
+          - IDEs usually lint the code in real time
       - title: Goals
         list:
           - make sure the code is valid from a syntax point of view
           - make sure the code follows standards in terms of formatting
           - reduce the manual effort in code reviews
+        notes:
+          - Code reviews can focus on the design and logic of the code
+          - Code reviews do not have to focus on the syntax and formatting
+          - Code reviews can be done faster
       - title: Tools
         list:
           - PHP Code Sniffer
@@ -23,64 +36,44 @@ slides:
           php-lint:
             stage: test
             image: php:8.1-cli
-            before_script:
-              - composer install
             script:
               - vendor/bin/parallel-lint --exclude vendor/ .
           psr-12-lint:
             stage: test
             image: php:8.1-cli
-            before_script:
-              - composer install
             script:
               - vendor/bin/phpcs --standard=PSR12 --extensions=php --ignore=vendor/ .
-  - title: Unit Testing
-    subpages:
-      - title: Goals
-        list:
-          - provide fast feedback for developers
-          - make sure the code does what it is supposed to do
-          - make sure the code does not do what it is not supposed to do
-          - make sure there are no regressions
-          - make sure the code is easy to change
-          - make sure the mistakes are caught early
-      - title: Tools
-        list:
-          - PHPUnit
-          - infection
-      - title: Configuration (gitlab)
-        lang: yaml
-        code: |
-          # .gitlab-ci.yml
-          unit-test:
-            stage: test
-            image: php:8.1-cli
-            before_script:
-              - composer install
-            script:
-              - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.xml
-            artifacts:
-              reports:
-                cobertura: coverage.xml
-          mutation-test:
-            stage: test
-            image: php:8.1-cli
-            before_script:
-              - composer install
-            script:
-              - vendor/bin/infection --min-msi=60 --min-covered-msi=60 --threads=4
   - title: Static Analysis
     subpages:
+      - title: What is Static Analysis?
+        list:
+          - Static Analysis is analysing code without running it
+          - Static Analysis is usually done before the code is committed
+          - Static Analysis is usually done on the developer's machine and on the CI server
+        notes:
+          - Static Analysis is usually done on the whole codebase
+          - Static Analysis is usually pretty slow
+          - Static Analysis can be done in real time in IDEs
       - title: Goals
         list:
           - find potential bugs in the code
           - find potential performance issues in the code
           - find potential security issues in the code
+        notes:
+          - Static Analysis can find bugs that are hard to find with unit tests
+          - Static Analysis can find bugs that are hard to find with manual testing
+          - Static Analysis can find bugs that are hard to find with code reviews
       - title: Tools
         list:
           - Psalm
           - PHPStan
           - Phan
+        notes:
+          - All three are static analysis tools that focus on finding bugs
+          - All can be configured to different levels of strictness
+          - All can be configured to ignore specific issues
+          - None of them can find all bugs
+          - All may find false positives
       - title: Configuration (gitlab)
         lang: yaml
         code: |
@@ -88,21 +81,63 @@ slides:
           static-analysis-psalm:
               stage: test
               image: php:8.1-cli
-              before_script:
-              - composer install
               script:
               - vendor/bin/psalm --show-info=false
           static-analysis-phpstan:
               stage: test
               image: php:8.1-cli
-              before_script:
-              - composer install
               script:
               - vendor/bin/phpstan analyse --no-progress
           static-analysis-phan:
               stage: test
               image: php:8.1-cli
-              before_script:
-              - composer install
               script:
               - vendor/bin/phan
+  - title: Unit Testing
+    subpages:
+      - title: What is Unit Testing?
+        list:
+          - Unit Testing is testing a small unit of code in isolation
+          - Unit Testing is usually done before the code is committed
+          - Unit Testing is usually done on the developer's machine and on the CI server
+        notes:
+          - Unit Testing is usually done on a single class or function
+          - Unit Testing is usually pretty fast
+          - Unit Testing is a corner stone of well tested code
+          - Unit Testing is a requirement for save refactoring
+      - title: Goals
+        list:
+          - provide fast feedback for developers
+          - make sure the code does only what it is supposed to do
+          - make sure there are no regressions
+          - make sure the code is easy to change
+          - make sure mistakes are caught early
+        notes:
+          - Unit Testing is time intensive to start with
+          - Unit Testing is time saving in the long run
+          - Unit Testing is not a replacement for manual testing
+          - Unit Testing is easier on a codebase using Dependency Injection
+          - Unit Testing is easier on a codebase using SOLID principles
+      - title: Tools
+        list:
+          - PHPUnit
+          - infection
+        notes:
+          - PHPUnit is the most popular unit testing framework for PHP
+          - PHPUnit can be configured to run the tests in parallel
+          - infection mutates source code and runs the unit tests to see if they fail
+          - infection can be configured to fail if the caught or covered mutation score is too low
+      - title: Configuration (gitlab)
+        lang: yaml
+        code: |
+          # .gitlab-ci.yml
+          unit-test:
+            stage: test
+            image: php:8.1-cli
+            script:
+              - vendor/bin/phpunit --coverage-text
+          mutation-test:
+            stage: test
+            image: php:8.1-cli
+            script:
+              - vendor/bin/infection --min-msi=60 --min-covered-msi=60
