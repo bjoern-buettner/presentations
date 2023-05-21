@@ -3,7 +3,7 @@ const yaml = require('yaml');
 const handlebars = require('handlebars');
 const cssc = require('css-condense');
 const { minify } = require('html-minifier-terser');
-var validate = require('jsonschema').validate;
+const { validate } = require('jsonschema');
 
 const page = handlebars.compile(fs.readFileSync(`${__dirname}/../src/page.html`, 'utf8'));
 const index = handlebars.compile(fs.readFileSync(`${__dirname}/../src/index.html`, 'utf8'));
@@ -73,7 +73,6 @@ fs.copyFileSync(`${__dirname}/../src/favicon.ico`, `${__dirname}/../public/favic
   `${__dirname}/../src/bjoern-buettner-theme.css`,
   `${__dirname}/../node_modules/reveal.js/plugin/highlight/monokai.css`,
   `${__dirname}/../node_modules/reveal.js-verticator/plugin/verticator/verticator.css`,
-  `${__dirname}/../node_modules/reveal.js-copycode/plugin/copycode/copycode.css`,
   `${__dirname}/../src/style.css`,
 ]);
 
@@ -88,5 +87,4 @@ fs.copyFileSync(`${__dirname}/../src/favicon.ico`, `${__dirname}/../public/favic
   `${__dirname}/../node_modules/reveal.js/plugin/highlight/highlight.js`,
   `${__dirname}/../node_modules/reveal.js/plugin/notes/notes.js`,
   `${__dirname}/../node_modules/reveal.js-verticator/plugin/verticator/verticator.js`,
-  `${__dirname}/../node_modules/reveal.js-copycode/plugin/copycode/copycode.js`,
 ]);
