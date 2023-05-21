@@ -3,6 +3,7 @@ const yaml = require('yaml');
 const handlebars = require('handlebars');
 const cssc = require('css-condense');
 const { minify } = require('html-minifier-terser');
+var validate = require('jsonschema').validate;
 
 const page = handlebars.compile(fs.readFileSync(`${__dirname}/../src/page.html`, 'utf8'));
 const index = handlebars.compile(fs.readFileSync(`${__dirname}/../src/index.html`, 'utf8'));
@@ -12,10 +13,11 @@ const htmlMinifyOptions = {
   removeComments: true,
   useShortDoctype: true,
 };
+const schema = require(`${__dirname}/../src/schema.json`);
 const now = Date.now();
 
 if (fs.existsSync(`${__dirname}/../public`)) {
-  fs.rmdirSync(`${__dirname}/../public`, { recursive: true });
+  fs.rmSync(`${__dirname}/../public`, { recursive: true });
 }
 fs.mkdirSync(`${__dirname}/../public`);
 const pages = [];
@@ -23,6 +25,12 @@ for (const file of fs.readdirSync(`${__dirname}/../presentations`)) {
   if (file.endsWith('.yml')) {
     const name = file.split('.')[0];
     const presentation = yaml.parse(fs.readFileSync(`${__dirname}/../presentations/${file}`, 'utf8'));
+    const result = validate(presentation, schema);
+    if (!result.valid) {
+      console.error(`Invalid presentation: ${name}`);
+      console.error(result.errors);
+      process.exit(1);
+    }
     pages.push({
       title: presentation.title,
       name,

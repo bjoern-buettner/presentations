@@ -43,6 +43,9 @@ slides:
             image: php:8.1-cli
             script:
               - vendor/bin/phpcs --standard=PSR12 --extensions=php --ignore=vendor/ .
+        notes:
+          - PHP Parallel Lint checks the whole codebase except the vendor directory
+          - PHP Code Sniffer checks the whole codebase except the vendor directory
   - title: Static Analysis
     subpages:
       - title: What is Static Analysis?
@@ -93,6 +96,10 @@ slides:
               image: php:8.1-cli
               script:
               - vendor/bin/phan
+        notes:
+          - Psalm needs a configuration file in the root of the project
+          - PHPStan needs a configuration file in a specific of the project
+          - Phan needs a configuration file in the root of the project
   - title: Unit Testing
     subpages:
       - title: What is Unit Testing?
@@ -141,3 +148,7 @@ slides:
             image: php:8.1-cli
             script:
               - vendor/bin/infection --min-msi=60 --min-covered-msi=60
+        notes:
+          - PHPUnit must pass for infection to pass
+          - The coverage reported by PHPUnit is only a hint at how well code is tested
+          - The mutation score reported by infection is a hint at how well small mistakes are found
