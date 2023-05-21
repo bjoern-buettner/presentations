@@ -11,9 +11,17 @@
     "reveal.js-verticator": "^1.2.3",
     "yaml": "^2.2.2"
   },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "stylelint": "^15.6.2",
+    "stylelint-config-standard": "^33.0.0"
+  },
   "scripts": {
     "start": "npm run build && npm run serve",
     "build": "node src/build.js",
-    "serve": "http-server public -p 8080"
+    "serve": "http-server public -p 8080",
+    "lint": "eslint && stylelint",
+    "eslint": "eslint src",
+    "stylelint": "stylelint src/*.css"
   }
 }
