@@ -4,17 +4,6 @@ on:
     branches:
     - master
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js latest
-        uses: actions/setup-node@v3
-        with:
-          node-version: latest
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run lint
   build:
     runs-on: ubuntu-latest
     permissions:
@@ -28,6 +17,7 @@ jobs:
           node-version: latest
           cache: 'npm'
       - run: npm ci
+      - run: npm run lint
       - run: npm run build
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v1.0.8
