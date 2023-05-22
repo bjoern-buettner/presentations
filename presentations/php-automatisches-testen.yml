@@ -16,7 +16,7 @@ slides:
         list:
           - Sicherstellen, dass die Syntax korrekt ist
           - Sicherstellen, dass die Formatierung dem Standard entspricht
-          - Den manuellen Aufwand bei Code-Reviews reduzieren+
+          - Den manuellen Aufwand bei Code-Reviews reduzieren
         notes:
           - Code-Reviews können sich auf das Design und die Logik fokussieren
           - Code-Reviews müssen sich nicht um Syntax und Formatierung kümmern
