@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="{{presentation.lang}}">
     <head>
         <title>{{presentation.title}}</title>
         <meta charset="utf-8">
@@ -12,7 +12,7 @@
                     <h1>{{presentation.title}}</h1>
                 </section>
                 <section>
-                    <h2>Table of Contents</h2>
+                    <h2>{{toc}}</h2>
                     <ul id="table-of-contents">
                         {{#each presentation.slides}}
                             <li>{{title}}</li>
@@ -73,7 +73,7 @@
                     </section>
                 {{/each}}
                 <section>
-                    <strong>Thank you for your time!</strong>
+                    <strong>{{thank_you}}</strong>
                 </section>
             </article>
         </div>
@@ -88,6 +88,7 @@
                 }
             });
             Reveal.on('slidechanged', event => {
+                console.log(event);
                 if (event.indexh === 0) {
                     window.location.hash = '';
                     return;

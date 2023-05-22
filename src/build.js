@@ -34,11 +34,17 @@ for (const file of fs.readdirSync(`${__dirname}/../presentations`)) {
     pages.push({
       title: presentation.title,
       name,
+      lang: presentation.lang,
     });
     (async () => {
       fs.writeFileSync(
           `${__dirname}/../public/${name}.html`,
-          await minify(page({presentation, now}), htmlMinifyOptions)
+          await minify(page({
+            presentation,
+            now,
+            thank_you: presentation.lang==='en' ? 'Thank you for your time!' : 'Vielen Dank für Ihre Aufmerksamkeit!',
+            toc: presentation.lang==='en' ? 'Table of Contents' : 'Inhaltsverzeichnis',
+          }), htmlMinifyOptions)
       );
     })();
   }

@@ -1,4 +1,5 @@
 title: PHP Unit Testing
+lang: en
 slides:
   - title: What is Unit Testing
     list:
@@ -25,7 +26,7 @@ slides:
       - When the code is using built-in functions
       - When the code is using global state
     notes:
-      - Dependency Injection allows for easy isolation of tested code
+      - Dependency Injection allows for easy isolation of tested software
       - Static functions are hard to mock
       - Built-in functions are hard to mock
       - Global state is hard to control

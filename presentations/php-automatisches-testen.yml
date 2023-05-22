@@ -1,0 +1,155 @@
+title: Automatisches Testen in PHP
+lang: de
+slides:
+  - title: Linting
+    subpages:
+      - title: Was ist Linting?
+        list:
+          - Linting ist die Untersuchung des Codes auf mögliche Fehler
+          - Linting wird üblicherweise vor Commits durchgeführt
+          - Linting wird üblicherweise auf der Maschine des Entwicklers und dem CI-Server durchgeführt
+        notes:
+          - Linting wird üblicherweise auf den gesamten Quellcode angewandt
+          - Linting ist normalerweise sehr schnell
+          - Entwicklungsumgebungen stellen normalerweise Liniting in Echtzeit bereit
+      - title: Ziele
+        list:
+          - Sicherstellen, dass die Syntax korrekt ist
+          - Sicherstellen, dass die Formatierung dem Standard entspricht
+          - Den manuellen Aufwand bei Code-Reviews reduzieren+
+        notes:
+          - Code-Reviews können sich auf das Design und die Logik fokussieren
+          - Code-Reviews müssen sich nicht um Syntax und Formatierung kümmern
+          - Code-Reviews können schneller erledigt werden
+      - title: Werkzeuge
+        list:
+          - PHP Code Sniffer
+          - PHP Parallel Lint
+        notes:
+          - PHP Parallel Lint ist schneller als der eingebauten Linter in PHP
+          - PHP Parallel Lint prüft auf Syntaxfehler
+          - PHP Code Sniffer prüft Formatierung und Codestandards
+          - PHP Code Sniffer kann für bestimmte Standards konfiguriert werden, üblicherweise PSR-12
+      - title: Konfiguration (gitlab)
+        lang: yaml
+        code: |
+          # .gitlab-ci.yml
+          php-lint:
+            stage: test
+            image: php:8.1-cli
+            script:
+              - vendor/bin/parallel-lint --exclude vendor/ .
+          psr-12-lint:
+            stage: test
+            image: php:8.1-cli
+            script:
+              - vendor/bin/phpcs --standard=PSR12 --extensions=php --ignore=vendor/ .
+        notes:
+          - PHP Parallel Lint prüft den gesamten Quellcode außerhalb des vendor-Ordners
+          - PHP Code Sniffer prüft den gesamten Quellcode außerhalb des vendor-Ordners
+  - title: Statische Analyse
+    subpages:
+      - title: Was ist Statische Analyse?
+        list:
+          - Statische Analyse analysiert den Code ohne ihn auszuführen
+          - Statische Analyse wird normalerweise ausgeführt bevor der Code committed wird
+          - Statische Analyse wird normalerweise auf der Entwicklungsmaschiene und dem CI-Server durchgeführt
+        notes:
+          - Statische Analyse wird üblicherweise auf den gesamten Quellcode angewandt
+          - Statische Analyse ist üblicherweise relativ langsam
+          - Statische Analyse kann von Entwicklungsumgebungen üblicherweise in Echtzeit geleistet werden
+      - title: Ziele
+        list:
+          - Potentielle Bugs finden
+          - Potentielle Performanceprobleme finden
+          - Potentielle Sicherheitsprobleme finden
+        notes:
+          - Statische Analyse kann bugs finden, die mit Unittests schwer zu finden sind
+          - Statische Analyse kann bugs finden, die mit manuellen Tests schwer zu finden sind
+          - Statische Analyse kann bugs finden, die mit Code-Reviews schwer zu finden sind
+      - title: Werkzeuge
+        list:
+          - Psalm
+          - PHPStan
+          - Phan
+        notes:
+          - Alle drei sind statische Analysewerkzeuge, die sich auf das Finden von Bugs spezialisieren
+          - Alle können über die Konfiguration unterschiedlich Streng prüfen
+          - Alle können konfiguriert werden bestimmte Probleme zu ignorieren
+          - Keines der Werkzeuge kann alle Bugs finden
+          - Alle können fehlerhaft Treffer melden(false positive)
+      - title: Konfiguration (gitlab)
+        lang: yaml
+        code: |
+          # .gitlab-ci.yml
+          static-analysis-psalm:
+              stage: test
+              image: php:8.1-cli
+              script:
+              - vendor/bin/psalm --show-info=false
+          static-analysis-phpstan:
+              stage: test
+              image: php:8.1-cli
+              script:
+              - vendor/bin/phpstan analyse --no-progress
+          static-analysis-phan:
+              stage: test
+              image: php:8.1-cli
+              script:
+              - vendor/bin/phan
+        notes:
+          - Psalm benötigt einen Konfigurationsdatei im Projektordner
+          - PHPStan braucht einen Konfigurationsdatei im Projektordner
+          - Phan braucht eine Konfigurationsdatei in einem speziellen Ordner im Projekt
+  - title: Unit Tests
+    subpages:
+      - title: Was sind Unittests?
+        list:
+          - Unit Tests testen eine kleine Codeeinheit in Isolation
+          - Unit Tests werden üblicherweise ausgeführt bevor Code comittet wird
+          - Unit Tests werden üblicherweise auf der Entwicklermaschiene und dem CI-Server ausgeführt
+        notes:
+          - Unit Tests testen üblicherweise eine Klasse oder Funktion
+          - Unit Tests sind üblicherweise recht schnell
+          - Unit Tests sind eine Basis für gut getestete Software
+          - Unit Tests sind ein Bedingung für sicheres Refactoring
+      - title: Ziele
+        list:
+          - schnelles Feedback für Entwickler
+          - sicherstellen, dass Code nur das tut, was er soll
+          - sicherstellen, dass keine Regressionen vorkommen
+          - sicherstellen, dass der Code leicht zu ändern ist
+          - sicherstellen, dass Fehler frühzeitig gefunden werden
+        notes:
+          - Unit Tests sind zu Beginn Zeitintensiv
+          - Unit Tests sparen langfristig Zeit
+          - Unit Tests sind kein Ersatz für manuelles Testen
+          - Unit Tests sind leichter in Projekten mit Dependency Injection
+          - Unit Tests sind leichter in Projekten, die SOLID befolgen
+      - title: Werkzeuge
+        list:
+          - PHPUnit
+          - infection
+        notes:
+          - PHPUnit ist das übliche Framework für Unittests in PHP
+          - PHPUnit kann konfiguriert werden um mehrere Tests gleichzeitig auszufüren
+          - infection mutiert Quellcode und prüft dann, ob Tests fehlschlagen
+          - infection kann konfiguriert werden fehlzuschlagen wenn nicht genug Mutationen durch Tests gefunden werden
+      - title: Konfiguration (gitlab)
+        lang: yaml
+        code: |
+          # .gitlab-ci.yml
+          unit-test:
+            stage: test
+            image: php:8.1-cli
+            script:
+              - vendor/bin/phpunit --coverage-text
+          mutation-test:
+            stage: test
+            image: php:8.1-cli
+            script:
+              - vendor/bin/infection --min-msi=60 --min-covered-msi=60
+        notes:
+          - PHPUnit muss erfolgreich sein, damit infection läuft
+          - Die Abdeckung, die PHPUnit meldet, ist nur ein Hinweis auf die Qualität des Tests
+          - Der von infection gemeldete Mutationswert ist ein Hinweis wie gut kleine Fehler gefunden werden

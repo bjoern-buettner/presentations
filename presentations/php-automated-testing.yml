@@ -1,4 +1,5 @@
 title: Automatic Testing in PHP
+lang: en
 slides:
   - title: Linting
     subpages:
@@ -98,8 +99,8 @@ slides:
               - vendor/bin/phan
         notes:
           - Psalm needs a configuration file in the root of the project
-          - PHPStan needs a configuration file in a specific of the project
-          - Phan needs a configuration file in the root of the project
+          - PHPstan needs a configuration file in the root of the project
+          - Phan needs a configuration file in a specific folder of the project
   - title: Unit Testing
     subpages:
       - title: What is Unit Testing?

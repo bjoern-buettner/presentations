@@ -4,6 +4,9 @@
     "title": {
       "type": "string"
     },
+    "lang": {
+      "type": "string"
+    },
     "slides": {
       "type": "array",
       "items": {
@@ -95,7 +98,8 @@
   },
   "required": [
     "title",
-    "slides"
+    "slides",
+    "lang"
   ],
   "additionalProperties": false
 }
