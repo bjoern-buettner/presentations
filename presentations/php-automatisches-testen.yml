@@ -6,10 +6,10 @@ slides:
       - title: Was ist Linting?
         list:
           - Linting ist die Untersuchung des Codes auf mögliche Fehler
-          - Linting wird üblicherweise vor Commits durchgeführt
-          - Linting wird üblicherweise auf der Maschine des Entwicklers und dem CI-Server durchgeführt
+          - Linting wird vor Commits durchgeführt
+          - Linting wird auf der Maschine des Entwicklers und dem CI-Server durchgeführt
         notes:
-          - Linting wird üblicherweise auf den gesamten Quellcode angewandt
+          - Linting wird auf den gesamten Quellcode angewandt
           - Linting ist normalerweise sehr schnell
           - Entwicklungsumgebungen stellen normalerweise Liniting in Echtzeit bereit
       - title: Ziele
